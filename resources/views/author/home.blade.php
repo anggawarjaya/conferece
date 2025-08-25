@@ -8,10 +8,10 @@
   <div class="pt-16 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center">
-        <h1 class="text-5xl font-bold mb-6">International Conference on Computer Science</h1>
+        <h1 class="text-5xl font-bold mb-6">Welcome to the Annual International Seminar on Transformative Education and Educational Leadership (AISTEEL)</h1>
         <p class="text-xl mb-8 text-blue-100 max-w-3xl mx-auto">
-          Submit your research papers and contribute to the advancement of computer science. 
-          Join researchers from around the world in sharing innovative ideas and discoveries.
+          We are delighted to welcome you to AISTEEL, a premier forum for educators, researchers, and leaders from around the world. This seminar is dedicated to advancing innovative practices, transformative ideas, and research-driven strategies in education and leadership. 
+          Join us as we explore impactful approaches to shaping the future of learning and educational excellence.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="{{route('paper.create')}}" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 shadow-lg">
@@ -122,15 +122,15 @@
           <div class="space-y-3 text-sm">
             <div>
               <div class="font-medium text-gray-800">Technical Support</div>
-              <div class="text-gray-600">support@conference.org</div>
+              <div class="text-gray-600">support.aisteel@unimed.ac.id</div>
             </div>
             <div>
               <div class="font-medium text-gray-800">Program Chair</div>
-              <div class="text-gray-600">chair@conference.org</div>
+              <div class="text-gray-600">asiteel@unimed.ac.id</div>
             </div>
             <div>
               <div class="font-medium text-gray-800">General Inquiries</div>
-              <div class="text-gray-600">info@conference.org</div>
+              <div class="text-gray-600">pps@unimed.ac.id</div>
             </div>
           </div>
         </div>

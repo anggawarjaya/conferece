@@ -175,15 +175,15 @@
           <div class="space-y-3 text-sm">
             <div>
               <div class="font-medium text-gray-800">Review Coordinator</div>
-              <div class="text-gray-600">reviews@conference.org</div>
+              <div class="text-gray-600">aisteel.unimed.ac.id</div>
             </div>
             <div>
               <div class="font-medium text-gray-800">Program Chair</div>
-              <div class="text-gray-600">chair@conference.org</div>
+              <div class="text-gray-600">aisteel.unimed.ac.id</div>
             </div>
             <div>
               <div class="font-medium text-gray-800">Technical Support</div>
-              <div class="text-gray-600">support@conference.org</div>
+              <div class="text-gray-600">support.aisteel.unimed.ac.id</div>
             </div>
           </div>
         </div>

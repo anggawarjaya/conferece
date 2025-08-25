@@ -15,6 +15,7 @@ class HomeController extends Controller
         $settings = [
             'conference_name' => ConferenceSetting::get('conference_name', 'International Conference'),
             'conference_acronym' => ConferenceSetting::get('conference_acronym', 'CONF'),
+            'conference_email' => ConferenceSetting::get('conference_email', 'aisteel@unimed.ac.id'),
             'conference_year' => ConferenceSetting::get('conference_year', date('Y')),
             'conference_location' => ConferenceSetting::get('conference_location', 'University Campus'),
             'conference_website' => ConferenceSetting::get('conference_website', 'https://conference.example.com'),

@@ -9,7 +9,7 @@
       <div class="text-center">
         <h1 class="text-4xl font-bold mb-4">Submit Your Research Paper</h1>
         <p class="text-xl text-blue-100 max-w-2xl mx-auto">
-          Share your groundbreaking research with the global computer science community
+          Submit Your Research Papers Aligned with Conference Topics
         </p>
       </div>
     </div>
@@ -63,7 +63,7 @@
             </li>
             <li class="flex items-start">
               <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-              <span class="text-sm text-gray-700">Follows IEEE conference template</span>
+              <span class="text-sm text-gray-700">Follows AISTEEL conference template</span>
             </li>
             <li class="flex items-start">
               <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
@@ -86,7 +86,7 @@
           <div class="mt-4 pt-4 border-t border-gray-200">
             <a href="{{route('paper.print' , 'IEEE-paper-format-template.docx')}}" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center" download>
               <i class="fas fa-download mr-2"></i>
-              Download IEEE Template
+              Download AISTEEL Conference Template
             </a>
           </div>
         </div>
@@ -100,7 +100,7 @@
           <div class="space-y-3">
             <div>
               <div class="font-medium text-gray-800 text-sm">Technical Support</div>
-              <div class="text-gray-600 text-sm">support@conference.org</div>
+              <div class="text-gray-600 text-sm">support.aisteel@unimed.ac.id</div>
             </div>
             <div>
               <div class="font-medium text-gray-800 text-sm">Submission Guidelines</div>

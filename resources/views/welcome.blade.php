@@ -164,89 +164,136 @@
                 opacity: 0;
             }
         }
+        .marquee-text {
+            animation: marquee-left 30s linear infinite;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 100%;
+            font-weight: bold;
+        }
+
+        @keyframes marquee-left {
+            0% {
+                left: 100%;
+            }
+            100% {
+                left: -100%;
+            }
+        }
     </style>
+    <style>
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.animate-marquee {
+    animation: marquee 15s linear infinite;
+}
+</style>
 </head>
 <body class="font-sans text-gray-800 leading-normal antialiased">
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 text-white">
-        <div class="container mx-auto px-4 py-5">
-            <div class="flex flex-wrap items-center justify-between">
-                <a href="#" class="text-xl font-bold">
-                    {{ $settings['conference_acronym'] }} {{ $settings['conference_year'] }}
-                </a>
-                
-                <button id="menu-toggle" class="lg:hidden block focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-                
-                <div id="menu" class="hidden lg:flex lg:items-center w-full lg:w-auto">
-                    <div class="lg:flex lg:ml-auto">
-                        <a href="#" class="block lg:inline-block px-4 py-2 hover:text-blue-300 text-white font-medium">Home</a>
-                        <a href="#about" class="block lg:inline-block px-4 py-2 hover:text-blue-300 text-white font-medium">About</a>
-                        <a href="#dates" class="block lg:inline-block px-4 py-2 hover:text-blue-300 text-white font-medium">Important Dates</a>
-                        <a href="#submission" class="block lg:inline-block px-4 py-2 hover:text-blue-300 text-white font-medium">Submission</a>
-                        <a href="#reviewers" class="block lg:inline-block px-4 py-2 hover:text-blue-300 text-white font-medium">Reviewers</a>
-                        <a href="#location" class="block lg:inline-block px-4 py-2 hover:text-blue-300 text-white font-medium">Location</a>
-                        
-                        @if (Route::has('login'))
-                            @auth
-                                <a href="{{ url('/dashboard') }}" class="block lg:inline-block px-4 py-2 hover:text-blue-300 text-white font-medium">Dashboard</a>
-                            @else
-                                <a href="{{ route('login') }}" class="block lg:inline-block px-4 py-2 hover:text-blue-300 text-white font-medium">Log in</a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="block lg:inline-block px-4 py-2 hover:text-blue-300 text-white font-medium">Register</a>
-                                @endif
-                            @endauth
-                        @endif
-                    </div>
+    
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 text-white hidden lg:block">
+    <div class="bg-red-600 text-white py-1 overflow-hidden">
+        <div class="whitespace-nowrap animate-marquee">
+            <span class="inline-block px-4 text-xl font-bold">
+                🔧 Under maintenance by AISTEEL committee PPs UNIMED@2025 🔧
+            </span>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-5">
+        <div class="flex flex-wrap items-center justify-between">
+            <a href="#" class="text-xl font-bold">
+                {{ $settings['conference_acronym'] }} {{ $settings['conference_year'] }}
+            </a>
+            
+            <button id="menu-toggle" class="lg:hidden block focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            
+            <div id="menu" class="hidden lg:flex lg:items-center w-full lg:w-auto">
+                <div class="lg:flex lg:ml-auto">
+                    <a href="#" class="block lg:inline-block px-4 py-2 hover:text-blue-600 font-medium">Home</a>
+                    <a href="#about" class="block lg:inline-block px-4 py-2 hover:text-blue-600 font-medium">About</a>
+                    <a href="#dates" class="block lg:inline-block px-4 py-2 hover:text-blue-600 font-medium">Important Dates</a>
+                    <a href="#submission" class="block lg:inline-block px-4 py-2 hover:text-blue-600 font-medium">Submission</a>
+                    <a href="#reviewers" class="block lg:inline-block px-4 py-2 hover:text-blue-600 font-medium">Reviewers</a>
+                    <a href="#location" class="block lg:inline-block px-4 py-2 hover:text-blue-600 font-medium">Location</a>
+                    
+                    @if (Route::has('login'))
+                        @auth
+                            <a href="{{ url('/dashboard') }}" class="block lg:inline-block px-4 py-2 hover:text-blue-600 font-medium">Dashboard</a>
+                        @else
+                            <a href="{{ route('login') }}" class="block lg:inline-block px-4 py-2 hover:text-blue-600 font-medium">Log in</a>
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="block lg:inline-block px-4 py-2 hover:text-blue-600 font-medium">Register</a>
+                            @endif
+                        @endauth
+                    @endif
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <section class="relative overflow-hidden bg-gradient-to-r from-blue-600 to-blue-800 text-white hero-pattern">
-        <div class="container mx-auto px-4 py-28 lg:py-36 relative z-10">
-            <div class="flex flex-wrap items-center">
-                <div class="w-full lg:w-7/12 mb-12 lg:mb-0">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-6">{{ $settings['conference_name'] }}</h1>
-                    <p class="text-xl mb-4">{{ $settings['conference_year'] }} | {{ $settings['conference_location'] }}</p>
-                    <p class="text-lg opacity-90 mb-8 max-w-2xl">{{ $settings['conference_description'] }}</p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#submission" class="bg-white text-blue-700 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors duration-300">Submit Paper</a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="border border-white text-white hover:bg-white hover:text-blue-700 px-6 py-3 rounded-lg font-medium transition-colors duration-300">Register Now</a>
-                        @endif
-                    </div>
+
+    <section class="relative overflow-hidden text-white hero-pattern">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+        <img src="{{ asset('assets/img/pps-unimed.jpg') }}" alt="Hero Background" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+    </div>
+
+        <div class="container mx-auto px-4 relative z-10 min-h-[700px] flex items-center">
+        <div class="flex flex-wrap items-center">
+            <div class="w-full lg:w-7/12 mb-12 lg:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold my-6">{{ $settings['conference_name'] }}</h1>
+                <p class="text-xl mb-4">{{ $settings['conference_year'] }} | {{ $settings['conference_location'] }}</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#submission" class="bg-white text-blue-700 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors duration-300">Submit Paper</a>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="bg-blue-700 text-white hover:bg-white hover:text-blue-700 px-6 py-3 rounded-lg font-medium transition-colors duration-300">Register Now</a>
+                    @endif
                 </div>
-                <div class="w-full lg:w-5/12">
-                    <div class="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-md">
-                        <h4 class="text-center text-xl font-semibold mb-6">Submission Deadline</h4>
-                        <div class="flex flex-wrap justify-center" id="countdown">
-                            <div class="bg-white bg-opacity-15 rounded-lg mx-2 mb-2 p-4 min-w-20 text-center">
-                                <div id="days" class="text-3xl font-bold">--</div>
-                                <div>Days</div>
-                            </div>
-                            <div class="bg-white bg-opacity-15 rounded-lg mx-2 mb-2 p-4 min-w-20 text-center">
-                                <div id="hours" class="text-3xl font-bold">--</div>
-                                <div>Hours</div>
-                            </div>
-                            <div class="bg-white bg-opacity-15 rounded-lg mx-2 mb-2 p-4 min-w-20 text-center">
-                                <div id="minutes" class="text-3xl font-bold">--</div>
-                                <div>Minutes</div>
-                            </div>
-                            <div class="bg-white bg-opacity-15 rounded-lg mx-2 mb-2 p-4 min-w-20 text-center">
-                                <div id="seconds" class="text-3xl font-bold">--</div>
-                                <div>Seconds</div>
-                            </div>
+            </div>
+            <div class="w-full lg:w-5/12">
+                <div class="bg-white bg-opacity-10 p-6 mb-3 rounded-xl backdrop-blur-md">
+                    <h4 class="text-center text-xl font-semibold mb-6">Submission Deadline</h4>
+                    <div class="flex flex-wrap justify-center" id="countdown">
+                        <div class="bg-white bg-opacity-15 rounded-lg mx-2 mb-2 p-4 min-w-20 text-center">
+                            <div id="days" class="text-3xl font-bold">--</div>
+                            <div>Days</div>
+                        </div>
+                        <div class="bg-white bg-opacity-15 rounded-lg mx-2 mb-2 p-4 min-w-20 text-center">
+                            <div id="hours" class="text-3xl font-bold">--</div>
+                            <div>Hours</div>
+                        </div>
+                        <div class="bg-white bg-opacity-15 rounded-lg mx-2 mb-2 p-4 min-w-20 text-center">
+                            <div id="minutes" class="text-3xl font-bold">--</div>
+                            <div>Minutes</div>
+                        </div>
+                        <div class="bg-white bg-opacity-15 rounded-lg mx-2 mb-2 p-4 min-w-20 text-center">
+                            <div id="seconds" class="text-3xl font-bold">--</div>
+                            <div>Seconds</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="about" class="py-20 bg-gray-50">
+
+        <section id="about" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-16 section-title">About The Conference</h2>
             
@@ -284,8 +331,72 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>  
 
+<section class="bg-blue-800 text-white py-20 px-4">
+  <div class="container mx-auto max-w-6xl">
+    <h2 class="text-3xl font-bold text-center mb-16 section-title">Keynote Speakers</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {{-- Speaker 1 --}}
+      <div class="bg-blue-700 p-8 rounded-lg shadow-xl flex flex-col md:flex-row items-center md:items-start text-center md:text-left space-y-6 md:space-y-0 md:space-x-8 transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:bg-blue-600">
+        <div class="flex-shrink-0">
+          {{-- Perubahan di sini: Kontainer gambar persegi dengan sudut membulat --}}
+          <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-lg overflow-hidden border-4 border-blue-400">
+            <img
+              src="{{ asset('assets/img/Prof syawal.jpg') }}"
+              alt="Photo of Prof. Dr. Syawal Gultom"
+              class="object-cover w-full h-full" {{-- img mengisi penuh kontainer --}}
+            />
+          </div>
+        </div>
+        <div class="flex-grow">
+          <h3 class="text-2xl font-extrabold mb-2 pb-2 border-b border-blue-500">Professor Syawal Gultom</h3>
+          <p class="text-lg font-medium opacity-90 mt-2">Specializes in teaching, research, and service in educational leadership and administration</p>
+          <p class="text-base opacity-80">Universitas Negeri Medan, Indonesia</p>
+        </div>
+      </div>
+
+      {{-- Speaker 2 --}}
+      <div class="bg-blue-700 p-8 rounded-lg shadow-xl flex flex-col md:flex-row items-center md:items-start text-center md:text-left space-y-6 md:space-y-0 md:space-x-8 transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:bg-blue-600">
+        <div class="flex-shrink-0">
+          {{-- Perubahan di sini: Kontainer gambar persegi dengan sudut membulat --}}
+          <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-lg overflow-hidden border-4 border-blue-400">
+            <img
+              src="{{ asset('assets/img/Prof Mine.png') }}"
+              alt="Photo of Prof. Dr. Eng. Tsunenori Mine"
+              class="object-cover w-full h-full" {{-- img mengisi penuh kontainer --}}
+            />
+          </div>
+        </div>
+        <div class="flex-grow">
+          <h3 class="text-2xl font-extrabold mb-2 pb-2 border-b border-blue-500">Professor Tsunenori Mine</h3>
+          <p class="text-lg font-medium opacity-90 mt-2">Research and Development of Intelligent Information Systems toward Ubiquitous Environemnt</p>
+          <p class="text-base opacity-80">Kyushu University, Japan</p>
+        </div>
+      </div>
+      {{-- Speaker 3 --}}
+      <div class="bg-blue-700 p-8 rounded-lg shadow-xl flex flex-col md:flex-row items-center md:items-start text-center md:text-left space-y-6 md:space-y-0 md:space-x-8 transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:bg-blue-600">
+        <div class="flex-shrink-0">
+          {{-- Perubahan di sini: Kontainer gambar persegi dengan sudut membulat --}}
+          <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-lg overflow-hidden border-4 border-blue-400">
+            <img
+              src="{{ asset('assets/img/DrBalazsHuszka.png') }}"
+              alt="Photo of Prof. Dr. Eng. Tsunenori Mine"
+              class="object-cover w-full h-full" {{-- img mengisi penuh kontainer --}}
+            />
+          </div>
+        </div>
+        <div class="flex-grow">
+          <h3 class="text-2xl font-extrabold mb-2 pb-2 border-b border-blue-500">Dr. Balazs Huszka</h3>
+          <p class="text-lg font-medium opacity-90 mt-2">Language Centre</p>
+          <p class="text-base opacity-80">Universiti Brunei Darussalam, Brunei</p>
+        </div>
+      </div>
+    </div>
+  
+</section> 
+    
     <section id="dates" class="py-20 bg-gradient-to-b from-white to-gray-50">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-16 section-title">Important Dates</h2>
@@ -312,7 +423,7 @@
                                         @endphp
                                         {{ $formattedDate }}
                                     </div>
-                                    <h3 class="font-bold text-lg mb-2">Paper Submission</h3>
+                                    <h3 class="font-bold text-lg mb-2">Abstract Submission deadline</h3>
                                     <p class="text-gray-600 text-sm">Deadline for authors to submit their complete papers.</p>
                                 </div>
                             </div>
@@ -334,7 +445,7 @@
                                         @endphp
                                         {{ $formattedDate }}
                                     </div>
-                                    <h3 class="font-bold text-lg mb-2">Review Notification</h3>
+                                    <h3 class="font-bold text-lg mb-2">Abstract acceptance notification</h3>
                                     <p class="text-gray-600 text-sm">Authors will be notified of acceptance decisions.</p>
                                 </div>
                             </div>
@@ -356,7 +467,7 @@
                                         @endphp
                                         {{ $formattedDate }}
                                     </div>
-                                    <h3 class="font-bold text-lg mb-2">Camera-Ready</h3>
+                                    <h3 class="font-bold text-lg mb-2">Full Paper Submission deadline</h3>
                                     <p class="text-gray-600 text-sm">Final revised papers must be submitted.</p>
                                 </div>
                             </div>
@@ -378,7 +489,7 @@
                                         @endphp
                                         {{ $formattedDate }}
                                     </div>
-                                    <h3 class="font-bold text-lg mb-2">Registration</h3>
+                                    <h3 class="font-bold text-lg mb-2">Seminar day</h3>
                                     <p class="text-gray-600 text-sm">Deadline for author registration and payment.</p>
                                 </div>
                             </div>
@@ -393,7 +504,7 @@
                                 <i class="fas fa-file-alt text-white text-sm"></i>
                             </div>
                             <div class="bg-white rounded-lg shadow p-4 ml-4">
-                                <h5 class="text-lg font-semibold text-gray-800">Paper Submission</h5>
+                                <h5 class="text-lg font-semibold text-gray-800">Abstract Submission deadline</h5>
                                 <div class="text-blue-600 text-sm mb-1">
                                     @php
                                         $date = \DateTime::createFromFormat('Y-m-d', $settings['submission_deadline']);
@@ -410,7 +521,7 @@
                                 <i class="fas fa-search text-white text-sm"></i>
                             </div>
                             <div class="bg-white rounded-lg shadow p-4 ml-4">
-                                <h5 class="text-lg font-semibold text-gray-800">Review Notification</h5>
+                                <h5 class="text-lg font-semibold text-gray-800">Abstract acceptance notification</h5>
                                 <div class="text-blue-600 text-sm mb-1">
                                     @php
                                         $date = \DateTime::createFromFormat('Y-m-d', $settings['review_deadline']);
@@ -427,7 +538,7 @@
                                 <i class="fas fa-camera text-white text-sm"></i>
                             </div>
                             <div class="bg-white rounded-lg shadow p-4 ml-4">
-                                <h5 class="text-lg font-semibold text-gray-800">Camera-Ready Submission</h5>
+                                <h5 class="text-lg font-semibold text-gray-800">Full Paper Submission deadline </h5>
                                 <div class="text-blue-600 text-sm mb-1">
                                     @php
                                         $date = \DateTime::createFromFormat('Y-m-d', $settings['camera_ready_deadline']);
@@ -444,7 +555,7 @@
                                 <i class="fas fa-user-check text-white text-sm"></i>
                             </div>
                             <div class="bg-white rounded-lg shadow p-4 ml-4">
-                                <h5 class="text-lg font-semibold text-gray-800">Registration Deadline</h5>
+                                <h5 class="text-lg font-semibold text-gray-800">Seminar day</h5>
                                 <div class="text-blue-600 text-sm mb-1">
                                     @php
                                         $date = \DateTime::createFromFormat('Y-m-d', $settings['registration_deadline']);
@@ -495,95 +606,371 @@
         </div>
     </section>
 
-    <section id="topics" class="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16 section-title">Conference Topics</h2>
-            
-            <div class="max-w-6xl mx-auto">
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    @php
-                        $keywordGroups = [
-                            'core' => array_slice($settings['keywords_array'], 0, ceil(count($settings['keywords_array'])/3)),
-                            'emerging' => array_slice($settings['keywords_array'], ceil(count($settings['keywords_array'])/3), ceil(count($settings['keywords_array'])/3)),
-                            'applied' => array_slice($settings['keywords_array'], 2*ceil(count($settings['keywords_array'])/3))
-                        ];
-                        $groupInfo = [
-                            'core' => [
-                                'icon' => 'fas fa-laptop-code',
-                                'title' => 'Core Topics',
-                                'color' => 'blue'
-                            ],
-                            'emerging' => [
-                                'icon' => 'fas fa-lightbulb',
-                                'title' => 'Emerging Areas',
-                                'color' => 'purple'
-                            ],
-                            'applied' => [
-                                'icon' => 'fas fa-cogs',
-                                'title' => 'Applied Research',
-                                'color' => 'green'
-                            ]
-                        ];
-                    @endphp
-                    
-                    @foreach($keywordGroups as $group => $keywords)
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg topic-card">
-                            <div class="p-6">
-                                <div class="flex items-center mb-6">
-                                    <div class="rounded-full w-12 h-12 flex items-center justify-center {{ 'bg-'.$groupInfo[$group]['color'].'-100 text-'.$groupInfo[$group]['color'].'-600' }}">
-                                        <i class="{{ $groupInfo[$group]['icon'] }} text-xl"></i>
-                                    </div>
-                                    <h3 class="text-xl font-bold ml-4">{{ $groupInfo[$group]['title'] }}</h3>
-                                </div>
-                                
-                                <div class="space-y-4">
-                                    @foreach($keywords as $keyword)
-                                        <div class="flex items-center topic-item opacity-0">
-                                            <div class="w-8 h-8 rounded-lg flex items-center justify-center {{ 'bg-'.$groupInfo[$group]['color'].'-50 text-'.$groupInfo[$group]['color'].'-500' }} mr-3">
-                                                <i class="fas fa-check text-sm"></i>
-                                            </div>
-                                            <div>
-                                                <h5 class="font-medium">{{ trim($keyword) }}</h5>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                
-                                <div class="mt-6 text-center">
-                                    <button class="px-4 py-2 rounded-lg border {{ 'border-'.$groupInfo[$group]['color'].'-500 text-'.$groupInfo[$group]['color'].'-600 hover:bg-'.$groupInfo[$group]['color'].'-50' }} transition-colors duration-300 topic-details-btn">
-                                        Learn more
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                
-                <div class="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8">
-                    <h3 class="text-2xl font-semibold text-center mb-8">Explore Research Areas</h3>
-                    
-                    <div class="flex flex-wrap justify-center gap-4">
-                        @foreach($settings['keywords_array'] as $index => $keyword)
-                            @php
-                                $sizes = ['text-sm', 'text-base', 'text-lg', 'text-xl'];
-                                $colors = ['blue', 'indigo', 'purple', 'cyan'];
-                                
-                                $size = $sizes[$index % count($sizes)];
-                                $color = $colors[$index % count($colors)];
-                                
-                                $weights = ['font-normal', 'font-medium', 'font-semibold'];
-                                $weight = $weights[$index % count($weights)];
-                            @endphp
-                            
-                            <span class="{{ $size }} {{ $weight }} {{ 'text-'.$color.'-600 bg-'.$color.'-50 hover:bg-'.$color.'-100' }} px-4 py-2 rounded-full transition-all duration-300 cursor-pointer transform hover:scale-105 tag-item opacity-0">
-                                {{ trim($keyword) }}
-                            </span>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+   <section class="py-20 bg-gray-50">
+  <div class="container mx-auto">
+    <div class="flex flex-col items-center justify-center space-y-4 text-center">
+      <div class="space-y-2">
+        <h2 class="text-3xl font-bold text-center mb-16 section-title">Conference Topics</h2>
+      </div>
+    </div>
+    <div class="mx-auto grid max-w-5xl items-start gap-6 py-12 lg:grid-cols-2 lg:gap-12">
+      <ul class="grid gap-4 text-left">
+        <li class="flex items-start gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mt-1 h-5 w-5 flex-shrink-0 text-blue-600"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span>Teachers Education Model in Future</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mt-1 h-5 w-5 flex-shrink-0 text-blue-600"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span>Education and Research Global Issue</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mt-1 h-5 w-5 flex-shrink-0 text-blue-600"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span>Transformative Learning and Educational Leadership</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mt-1 h-5 w-5 flex-shrink-0 text-blue-600"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span>Mathematics, Science and Nursing Education</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mt-1 h-5 w-5 flex-shrink-0 text-blue-600"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span>Social, Language and Cultural Education</span>
+        </li>
+      </ul>
+      <ul class="grid gap-4 text-left">
+        <li class="flex items-start gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mt-1 h-5 w-5 flex-shrink-0 text-blue-600"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span>Vocational Education and Educational Technology</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mt-1 h-5 w-5 flex-shrink-0 text-blue-600"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span>Economics, Business and Management Education</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mt-1 h-5 w-5 flex-shrink-0 text-blue-600"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span>Curriculum, Research and Development</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mt-1 h-5 w-5 flex-shrink-0 text-blue-600"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span>Innovative Educational Practices and Effective Technology in the Classroom</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mt-1 h-5 w-5 flex-shrink-0 text-blue-600"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span>Educational Policy and Administration Education</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="w-full py-12 md:py-20 lg:py-28 bg-white">
+  <div class="container px-4 md:px-6 mx-auto max-w-5xl">
+    <div class="rounded-xl border shadow-xl w-full bg-card text-card-foreground">
+      <div class="flex flex-col space-y-1.5 p-6 pb-6">
+        <h3 class="text-3xl font-bold text-center mb-16 section-title">Registration Fees</h3>
+      </div>
+      <div class="p-6 md:p-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <div class="overflow-x-auto">
+            <h3 class="text-xl font-bold mb-4 text-center text-blue-600">Overseas</h3>
+            <table class="w-full caption-bottom text-sm">
+              <thead class="[&_tr]:border-b bg-gray-50">
+                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                  <th class="h-12 px-4 text-left align-middle font-semibold text-gray-700 [&:has([role=checkbox])]:pr-0 min-w-[150px] py-3 text-sm">Participants</th>
+                  <th class="h-12 px-4 text-left align-middle font-semibold text-gray-700 [&:has([role=checkbox])]:pr-0 text-center py-3 text-sm">
+                    Early bird<br /><span class="font-normal text-gray-500 text-xs">(Before 30 Sep 2025)</span>
+                  </th>
+                  <th class="h-12 px-4 text-left align-middle font-semibold text-gray-700 [&:has([role=checkbox])]:pr-0 text-center py-3 text-sm">
+                    Normal Rate<br /><span class="font-normal text-gray-500 text-xs">(1 Oct - 19 Nov, 2025)</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="[&_tr:last-child]:border-0">
+                <tr class="border-b transition-colors hover:bg-gray-50 data-[state=selected]:bg-muted">
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium py-3">Presenter (single)</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">USD 260</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">USD 300</td>
+                </tr>
+                <tr class="border-b transition-colors hover:bg-gray-50 data-[state=selected]:bg-muted">
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium py-3">Extra one paper</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">USD 150</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">USD 200</td>
+                </tr>
+                <tr class="border-b transition-colors hover:bg-gray-50 data-[state=selected]:bg-muted">
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium py-3">
+                    Student Presenter<sup class="text-xs">*</sup>
+                  </td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">USD 220</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">USD 250</td>
+                </tr>
+                <tr class="border-b transition-colors hover:bg-gray-50 data-[state=selected]:bg-muted">
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium py-3">
+                    Student Participant<sup class="text-xs">*</sup>
+                  </td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">USD 100</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">USD 150</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+           
+          <div class="overflow-x-auto">
+            <h3 class="text-xl font-bold mb-4 text-center text-blue-600">Domestic/Local</h3>
+            <table class="w-full caption-bottom text-sm">
+              <thead class="[&_tr]:border-b bg-gray-50">
+                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                  <th class="h-12 px-4 text-left align-middle font-semibold text-gray-700 [&:has([role=checkbox])]:pr-0 min-w-[150px] py-3 text-sm">Participants</th>
+                  <th class="h-12 px-4 text-left align-middle font-semibold text-gray-700 [&:has([role=checkbox])]:pr-0 text-center py-3 text-sm">
+                    Early bird<br /><span class="font-normal text-gray-500 text-xs">(Before 30 Sep 2025)</span>
+                  </th>
+                  <th class="h-12 px-4 text-left align-middle font-semibold text-gray-700 [&:has([role=checkbox])]:pr-0 text-center py-3 text-sm">
+                    Normal Rate<br /><span class="font-normal text-gray-500 text-xs">(1 Oct - 19 Nov, 2025)</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="[&_tr:last-child]:border-0">
+                <tr class="border-b transition-colors hover:bg-gray-50 data-[state=selected]:bg-muted">
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium py-3">Presenter (single)</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">IDR 3,000,050</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">IDR 3,000,050</td>
+                </tr>
+                <tr class="border-b transition-colors hover:bg-gray-50 data-[state=selected]:bg-muted">
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium py-3">
+                    Student Presenter<sup class="text-xs">*</sup>
+                  </td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">IDR 2,700,050</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">IDR 3,000,050</td>
+                </tr>
+                <tr class="border-b transition-colors hover:bg-gray-50 data-[state=selected]:bg-muted">
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium py-3">Extra one paper</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">IDR 1,800,050</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">IDR 2,000,050</td>
+                </tr>
+                <tr class="border-b transition-colors hover:bg-gray-50 data-[state=selected]:bg-muted">
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium py-3">Non Presenter</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">IDR 300,050</td>
+                  <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-center py-3">IDR 350,050</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-    </section>
+
+        <p class="text-sm text-gray-500 mt-6">
+          <sup class="text-xs">*</sup>enclose student ID
+        </p>
+
+        <div class="mt-8">
+          <h3 class="text-1xl font-bold mb-4 text-blue-600">The registration fee includes:</h3>
+          <ul class="space-y-2 text-gray-500 text-base">
+            <li class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-5 w-5 text-green-500 flex-shrink-0"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-8.16" />
+                <path d="m9 11 3 3L22 4" />
+              </svg>
+              <span>Seminar kits</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-5 w-5 text-green-500 flex-shrink-0"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-8.16" />
+                <path d="m9 11 3 3L22 4" />
+              </svg>
+              <span>E-Book of abstracts</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-5 w-5 text-green-500 flex-shrink-0"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-8.16" />
+                <path d="m9 11 3 3L22 4" />
+              </svg>
+              <span>E-certificate</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-5 w-5 text-green-500 flex-shrink-0"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-8.16" />
+                <path d="m9 11 3 3L22 4" />
+              </svg>
+              <span>Publication fee</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
     <section id="reviewers" class="py-20 bg-gradient-to-b from-white to-blue-50">
         <div class="container mx-auto px-4">
@@ -605,7 +992,7 @@
                         <div class="p-6">
                             <h3 class="font-bold text-xl mb-1 text-gray-900">{{ $reviewer->name }} {{ $reviewer->last_name }}</h3>
                             <p class="text-blue-600 mb-3">{{ $reviewer->email }}</p>
-                            <p class="text-gray-600 text-sm mb-4">Expert reviewer and committee member for {{ $settings['conference_acronym'] }}.</p>
+                            <p class="text-gray-600 text-sm mb-4">Committee member for {{ $settings['conference_acronym'] }}.</p>
                             <div class="flex justify-center space-x-3 text-gray-500">
                                 <a href="#" class="hover:text-blue-600 transition-colors"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="hover:text-blue-600 transition-colors"><i class="fas fa-globe"></i></a>
@@ -618,12 +1005,12 @@
                 <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg reviewer-card opacity-0">
                     <div class="p-2">
                         <div class="aspect-w-1 aspect-h-1 bg-gray-100 rounded-t-lg overflow-hidden">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Professor James Wilson" class="object-cover w-full h-48">
+                            <img src="{{ asset('assets/img/eddiyanto.png') }}" alt="Drs. Eddiyanto, Ph.D" class="object-cover w-full h-48">
                         </div>
                         <div class="p-6">
-                            <h3 class="font-bold text-xl mb-1 text-gray-900">Prof. James Wilson</h3>
-                            <p class="text-blue-600 mb-3">Stanford University, USA</p>
-                            <p class="text-gray-600 text-sm mb-4">Expert in Machine Learning and Artificial Intelligence with over 100 publications in top-tier conferences.</p>
+                            <h3 class="font-bold text-xl mb-1 text-gray-900"> Drs. Eddiyanto, Ph.D</h3>
+                            <p class="text-blue-600 mb-3">Universitas Negeri Medan, Indonesia</p>
+                            <p class="text-gray-600 text-sm mb-4">Specializing in polymer chemistry and materials science, with a focus on natural fiber utilization, bioplastics, and rubber modification.</p>
                             <div class="flex justify-center space-x-3 text-gray-500">
                                 <a href="#" class="hover:text-blue-600 transition-colors"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="hover:text-blue-600 transition-colors"><i class="fas fa-globe"></i></a>
@@ -636,12 +1023,12 @@
                 <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg reviewer-card opacity-0">
                     <div class="p-2">
                         <div class="aspect-w-1 aspect-h-1 bg-gray-100 rounded-t-lg overflow-hidden">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Dr. Emily Chen" class="object-cover w-full h-48">
+                            <img src="{{ asset('assets/img/direktur.png') }}" alt="Prof. Dr. Budi Valianto, M.Pd" class="object-cover w-full h-48">
                         </div>
                         <div class="p-6">
-                            <h3 class="font-bold text-xl mb-1 text-gray-900">Dr. Emily Chen</h3>
-                            <p class="text-blue-600 mb-3">MIT, USA</p>
-                            <p class="text-gray-600 text-sm mb-4">Specializes in Computer Vision and Deep Learning with extensive industry experience at leading tech companies.</p>
+                            <h3 class="font-bold text-xl mb-1 text-gray-900">Prof. Dr. Budi Valianto, M.Pd.</h3>
+                            <p class="text-blue-600 mb-3">Universitas Negeri Medan, Indonesia</p>
+                            <p class="text-gray-600 text-sm mb-4">His research emphasizes both high-performance sports and inclusive physical education, making a practical impact on student-athletes, coaches, and education systems.</p>
                             <div class="flex justify-center space-x-3 text-gray-500">
                                 <a href="#" class="hover:text-blue-600 transition-colors"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="hover:text-blue-600 transition-colors"><i class="fas fa-globe"></i></a>
@@ -655,12 +1042,12 @@
                 <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg reviewer-card opacity-0">
                     <div class="p-2">
                         <div class="aspect-w-1 aspect-h-1 bg-gray-100 rounded-t-lg overflow-hidden">
-                            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Professor Ahmed Khan" class="object-cover w-full h-48">
+                            <img src="{{ asset('assets/img/rahman.jpg') }}" alt="Dr. Abdurahman Adisaputera, M.Hum." class="object-cover w-full h-48">
                         </div>
                         <div class="p-6">
-                            <h3 class="font-bold text-xl mb-1 text-gray-900">Prof. Ahmed Khan</h3>
-                            <p class="text-blue-600 mb-3">ETH Zurich, Switzerland</p>
-                            <p class="text-gray-600 text-sm mb-4">Leading researcher in Distributed Systems and Cloud Computing, with numerous awards for academic excellence.</p>
+                            <h3 class="font-bold text-xl mb-1 text-gray-900">Dr. Abdurahman Adisaputera, M.Hum.</h3>
+                            <p class="text-blue-600 mb-3">Universitas Negeri Medan, Indonesia</p>
+                            <p class="text-gray-600 text-sm mb-4">His scholarly work explores how socio-economic and cultural contexts influence student learning, with a strong focus on developing innovative, culturally grounded teaching materials.</p>
                             <div class="flex justify-center space-x-3 text-gray-500">
                                 <a href="#" class="hover:text-blue-600 transition-colors"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="hover:text-blue-600 transition-colors"><i class="fas fa-globe"></i></a>
@@ -782,22 +1169,49 @@
                 </div>
                 
                 <div>
-                    <h4 class="text-xl font-semibold mb-6">Contact Us</h4>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1.5 mr-3 text-blue-400"></i>
-                            <span>{{ $settings['conference_location'] }}</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-envelope mr-3 text-blue-400"></i>
-                            <span>contact@{{ strtolower($settings['conference_acronym']) }}.org</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-globe mr-3 text-blue-400"></i>
-                            <span>{{ $settings['conference_website'] }}</span>
-                        </li>
-                    </ul>
-                </div>
+    <h4 class="text-xl font-semibold mb-6">Contact Us</h4>
+    <ul class="space-y-4">
+        {{-- Organized by --}}
+        <li class="flex items-start">
+            <i class="fas fa-building mt-1.5 mr-3 text-blue-400"></i>
+            <span>
+                Organized by:<br>
+                Post Graduate School, Universitas Negeri Medan<br>
+                Jl. Willem Iskandar Psr.V Medan, North Sumatera<br>
+                Indonesia 20221
+            </span>
+        </li>
+
+        {{-- Phone & Fax --}}
+        <li class="flex items-start">
+            <i class="fas fa-phone mt-1.5 mr-3 text-blue-400"></i>
+            <span>Telp: +6261-6636730<br>Fax: +6261-6636730</span>
+        </li>
+
+        {{-- Email --}}
+        <li class="flex items-center">
+            <i class="fas fa-envelope mr-3 text-blue-400"></i>
+            <span>{{ $settings['conference_email'] }}</span>
+        </li>
+
+        {{-- Website --}}
+        <li class="flex items-center">
+            <i class="fas fa-globe mr-3 text-blue-400"></i>
+            <span>{{ $settings['conference_website'] }}</span>
+        </li>
+
+        {{-- Contact Persons --}}
+        <li class="flex items-start">
+            <i class="fas fa-user-friends mt-1.5 mr-3 text-blue-400"></i>
+            <span>
+                Erika : +62812-6528-3482 (Call/SMS/WA)<br>
+                Yunus : +62812-6060-4656 (Call/SMS/WA)<br>
+                Zizi  : +628520625-1806 (Call/SMS/WA)
+            </span>
+        </li>
+    </ul>
+</div>
+
             </div>
             
             <div class="border-t border-gray-700 mt-12 pt-8 text-center">
@@ -854,7 +1268,25 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             setupSectionAnimations();
+
+            const navbar = document.getElementById("navbar");
+            const hero = document.querySelector("section"); // ambil hero pertama
+            
+            window.addEventListener("scroll", function () {
+                const heroBottom = hero.offsetTop + hero.offsetHeight;
+                
+                if (window.scrollY > heroBottom - 80) {
+                    // tampilkan nav
+                    navbar.classList.remove("hidden");
+                } else {
+                    // sembunyikan nav di mobile (tetap tampil di desktop)
+                    if (window.innerWidth < 1024) { // mobile < lg
+                        navbar.classList.add("hidden");
+                    }
+                }
+            });
         });
+
         
         function setupSectionAnimations() {
             const timelineCards = document.querySelectorAll('.date-card');
@@ -964,6 +1396,7 @@
             if (reviewerSection) reviewerObserver.observe(reviewerSection);
             if (locationSection) locationObserver.observe(locationSection);
         }
-    </script>
+</script>
+
 </body>
 </html>
