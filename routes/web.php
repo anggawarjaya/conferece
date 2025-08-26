@@ -7,11 +7,11 @@ Route::get('/', 'App\Http\Controllers\HomeController@index')->name('welcome');
 
 Auth::routes(['verify' => true]);
 
-Route::get('/register/author', [RegisterController::class, 'showAuthorRegisterForm'])->name('register.author');
-Route::post('/register/author', [RegisterController::class, 'registerAuthor'])->name('registerAuthor');
+// Route::get('/register/author', [RegisterController::class, 'showAuthorRegisterForm'])->name('register.author');
+// Route::post('/register/author', [RegisterController::class, 'registerAuthor'])->name('registerAuthor');
 
-Route::get('/register/reviewer', [RegisterController::class, 'showReviewerRegisterForm'])->name('register.reviewer');
-Route::post('/register/reviewer', [RegisterController::class, 'registerReviewer']);
+// Route::get('/register/reviewer', [RegisterController::class, 'showReviewerRegisterForm'])->name('register.reviewer');
+// Route::post('/register/reviewer', [RegisterController::class, 'registerReviewer']);
 
 Route::middleware('auth')->namespace('App\Http\Controllers\Author')->group(function () {
   Route::get('/home','HomeController@index')->name('home');

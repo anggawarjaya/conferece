@@ -68,54 +68,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role_id' => $data['role_id'] ?? '1', // Default role if not provided
+            'role_id' => 3,
         ]);
-    }
-
-    public function showAuthorRegisterForm()
-    {
-        return view('auth.register-author');
-    }
-
-    public function registerAuthor(Request $request)
-{
-    $this->validator($request->all())->validate();
-
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'role_id' => '3', // pakai 'author' jika kamu gunakan enum/string
-    ]);
-
-    // Kirim email verifikasi (jika MustVerifyEmail aktif)
-    $user->sendEmailVerificationNotification();
-
-    auth()->login($user);
-
-    return redirect('/home');
-}
-
-    public function showReviewerRegisterForm()
-    {
-        return view('auth.register-reviewer');
-    }
-
-    public function registerReviewer(Request $request)
-    {
-        $this->validator($request->all())->validate();
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => 'reviewer',
-        ]);
-
-        $user->sendEmailVerificationNotification();
-
-        auth()->login($user);
-
-        return redirect('/home');
     }
 }
