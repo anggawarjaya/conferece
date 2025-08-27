@@ -23,7 +23,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone',
         'email',
         'password',
-        'role_id'
+        'role_id',
+        'role',
+        'gender',
+        'institution_name',
+        'phone',
+        'origin',
+        'status',
+        'student_file',
     ];
 
     /**
@@ -53,6 +60,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function role()
     {
         return $this->belongsTo(Roles::class);
+    }
+
+    public function paper()
+    {
+        return $this->hasOne(Paper::class , 'author_id');
     }
 
     public function reviews()
