@@ -53,6 +53,13 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'rolename' => ['required', 'in:Participant,Presenter'],
+            'gender' => ['required', 'in:Male,Female'],
+            'institution_name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:20'],
+            'origin' => ['required', 'in:Domestic,Overseas'],
+            'status' => ['required', 'in:Normal,Student'],
+            'student_file' => ['nullable', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:2048'],
         ]);
     }
 
@@ -64,11 +71,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $studentFile = null;
+        if (isset($data['student_file'])) {
+            $studentFile = $data['student_file']->store('student_files', 'public');
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role_id' => 3,
+            'rolename' => $data['rolename'],
+            'gender' => $data['gender'],
+            'institution_name' => $data['institution_name'],
+            'phone' => $data['phone'],
+            'origin' => $data['origin'],
+            'status' => $data['status'],
+            'student_file' => $studentFile,
         ]);
     }
 }

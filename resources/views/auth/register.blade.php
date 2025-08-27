@@ -15,7 +15,7 @@
 
       <!-- Form Login -->
       <div class="p-6 space-y-6">
-        <form method="POST" action="{{ route('register') }}" class="space-y-2">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="space-y-2">
           @csrf
 
           <!-- Email -->
@@ -37,6 +37,7 @@
               </span>
             @enderror
           </div>
+          
           <div class="space-y-2">
             <label for="email" class="text-sm font-medium text-slate-900">Email</label>
             <input
@@ -49,6 +50,132 @@
               required
             />
             @error('email')
+              <span class="p-3 text-sm text-red-600 bg-red-100 rounded-md" role="alert">
+                {{ $message }}
+              </span>
+            @enderror
+          </div>
+
+          <div class="space-y-2">
+            <label for="rolename" class="text-sm font-medium text-slate-900">Role</label>
+            <select
+              id="rolename"
+              name="rolename"
+              class="w-full pl-3 pr-3 py-3 bg-white border border-slate-200 rounded-md focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600 outline-none"
+              required
+            >
+              <option value="">-- Select Role --</option>
+              <option value="Participant">Participant</option>
+              <option value="Presenter">Presenter</option>
+            </select>
+            @error('rolename')
+              <span class="p-3 text-sm text-red-600 bg-red-100 rounded-md" role="alert">
+                {{ $message }}
+              </span>
+            @enderror
+          </div>
+
+          <div class="space-y-2">
+            <label for="gender" class="text-sm font-medium text-slate-900">Gender</label>
+            <select
+              id="gender"
+              name="gender"
+              class="w-full pl-3 pr-3 py-3 bg-white border border-slate-200 rounded-md focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600 outline-none"
+              required
+            >
+              <option value="">-- Select Gender --</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            @error('gender')
+              <span class="p-3 text-sm text-red-600 bg-red-100 rounded-md" role="alert">
+                {{ $message }}
+              </span>
+            @enderror
+          </div>
+
+          <div class="space-y-2" >
+            <label for="institution_name" class="text-sm font-medium text-slate-900">Institution Name</label>
+            <input 
+              type="text" 
+              id="institution_name" 
+              class="w-full pl-3 pr-3 py-3 bg-white border border-slate-200 rounded-md focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600 outline-none" 
+              name="institution_name"
+              placeholder="Enter your institution name"
+              value="{{ old('institution_name') }}" 
+              required 
+              />
+            @error('name')
+              <span class="p-3 text-sm text-red-600 bg-red-100 rounded-md" role="alert">
+                {{ $message }}
+              </span>
+            @enderror
+          </div>
+
+          <div class="space-y-2">
+            <label for="phone" class="text-sm font-medium text-slate-900">Phone</label>
+            <input 
+              type="text" 
+              id="phone" 
+              class="w-full pl-3 pr-3 py-3 bg-white border border-slate-200 rounded-md focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600 outline-none" 
+              name="phone"
+              placeholder="Enter your phone number"
+              value="{{ old('phone') }}" 
+              required
+            />
+            @error('phone')
+              <span class="p-3 text-sm text-red-600 bg-red-100 rounded-md" role="alert">
+                {{ $message }}
+              </span>
+            @enderror
+          </div>
+
+          <div class="space-y-2">
+            <label for="origin" class="text-sm font-medium text-slate-900">Origin</label>
+            <select
+              id="origin"
+              name="origin"
+              class="w-full pl-3 pr-3 py-3 bg-white border border-slate-200 rounded-md focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600 outline-none"
+              required
+            >
+              <option value="">-- Select Origin --</option>
+              <option value="Domestic">Domestic</option>
+              <option value="Overseas">Overseas</option>
+            </select>
+            @error('origin')
+              <span class="p-3 text-sm text-red-600 bg-red-100 rounded-md" role="alert">
+                {{ $message }}
+              </span>
+            @enderror
+          </div>
+
+          <div class="space-y-2">
+            <label for="status" class="text-sm font-medium text-slate-900">Status</label>
+            <select
+              id="status"
+              name="status"
+              class="w-full pl-3 pr-3 py-3 bg-white border border-slate-200 rounded-md focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600 outline-none"
+              required
+            >
+              <option value="">-- Select Status --</option>
+              <option value="Normal">Normal</option>
+              <option value="Student">Student</option>
+            </select>
+            @error('status')
+              <span class="p-3 text-sm text-red-600 bg-red-100 rounded-md">{{ $message }}</span>
+            @enderror
+          </div>
+
+          <div class="space-y-2" id="student-file-container" style="display: none;">
+            <label for="student_file" class="text-sm font-medium text-slate-900">Upload Student Proof</label>
+            <input 
+              type="file" 
+              id="student_file" 
+              name="student_file"
+              class="w-full pl-3 pr-3 py-3 bg-white border border-slate-200 rounded-md focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600 outline-none"
+              accept=".pdf,.jpg,.jpeg,.png"
+            />
+            @error('student_file')
               <span class="p-3 text-sm text-red-600 bg-red-100 rounded-md" role="alert">
                 {{ $message }}
               </span>
@@ -104,4 +231,14 @@
     </div>
   </div>
 </div>
+<script>
+  document.getElementById('status').addEventListener('change', function () {
+    const studentFileDiv = document.getElementById('student-file-container');
+    if (this.value === 'Student') {
+      studentFileDiv.style.display = 'block';
+    } else {
+      studentFileDiv.style.display = 'none';
+    }
+  });
+</script>
 @endsection
